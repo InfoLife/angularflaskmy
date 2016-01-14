@@ -113,7 +113,11 @@ class AuthenticateUser(Resource):
             cursor.execute("SELECT * FROM users WHERE username = (%s)", (username,))
             data = cursor.fetchall()
 
-            if check_password_hash(str(data[0][2]),password):
+            user = User.query.filter_by(username=args['username']).first()
+
+            if user and check_password_hash(
+            user.password, args['password']):
+        
                 session['user'] = data[0][0]
 
                 return {'success': True}
