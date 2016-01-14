@@ -97,17 +97,17 @@ class CreateUser(Resource):
 class AuthenticateUser(Resource):
     def post(self):
         try:
-            json_data = request.json
-            #parser = reqparse.RequestParser()
-            #parser.add_argument('username')
-            #parser.add_argument('password')
+            #json_data = request.json
+            parser = reqparse.RequestParser()
+            parser.add_argument('username')
+            parser.add_argument('password')
 
-            #args= parser.parse_args()
+            args= parser.parse_args()
 
-            #username = args['username']
-            #password = args['password']
-            username = json_data['username']
-            password = json_data['password']
+            username = args['username']
+            password = args['password']
+            #username = json_data['username']
+            #password = json_data['password']
 
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM users WHERE username = (%s)", (username,))
@@ -116,7 +116,7 @@ class AuthenticateUser(Resource):
             if check_password_hash(str(data[0][2]),password):
                 session['user'] = data[0][0]
 
-                return jsonify( {'success': True} )
+                return {'success': True}
             else:
                 return {'status':100,'message':'Wrong  email/password'}
             
