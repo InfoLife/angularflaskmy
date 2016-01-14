@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS + Python Flask</title>
+      <!-- styles -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link href="static/css/app.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+	  <li data-ng-show="!loggedIn" role="presentation"><a href="#/">Home</a></li>
+            <li data-ng-show="!loggedIn" role="presentation"><a href="#/login">Login</a></li>
+            <li data-ng-show="!loggedIn" role="presentation"><a href="#/register">Register</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+      
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+    
+     <br><br>
+     <footer class="footer">
+        <p>&copy; InfoLife 2016</p>
+      </footer>
+      
+        <!-- scripts -->
+
+    <script src="static/js/jquery-2.1.4.min.js"></script>
+    <script src="static/js/angular.min.js"></script>
+    <script src="static/js/angular-route.min.js"></script>
+    <script src="static/js/angular-cookies.js"></script>
+
+    <script src="static/app.js"></script>
+    <script src="static/app-services/authentication.service.js"></script>
+    <script src="static/app-services/flash.service.js"></script>
+
+    <!-- Real user service that uses an api -->
+    <script src="static/app-services/user.service.js"></script>
+    <script src="static/app-services/item.service.js"></script>
+    <!-- local storage register/login for tests -->
+   <!-- <script src="static/app-services/user.service.local-storage.js"></script>-->
+
+    <script src="static/home/home.controller.js"></script>
+    <script src="static/login/login.controller.js"></script>
+    <script src="static/register/register.controller.js"></script>
+</body>
+</html>
