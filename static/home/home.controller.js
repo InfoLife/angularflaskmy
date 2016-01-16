@@ -45,7 +45,7 @@
 		
 
 	    
-      $scope.addbook = function () {
+      $scope.addbook = function (elem) {
 		    
       // initial values
       $scope.error = false;
@@ -54,13 +54,8 @@
       // call register from service
       ItemService.addbook($scope.addBook.name, $scope.addBook.price)
         // handle success
-        .success(function (response) {
-		if (response.success) {
-			$scope.addBook = {};
-			FlashService.Success('add book successful', true);
-			} else {
-				FlashService.Error(response.message);
-			}
+        .success(function () {
+		$scope.addBook = {};
 				
 	
           $scope.disabled = false;
